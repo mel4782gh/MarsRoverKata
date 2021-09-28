@@ -21,4 +21,32 @@ public class VehicleMarsRover {
         this.directionFacing = left;
 
     }
+
+    public void right(){
+        //change direction 90 degrees to the left
+        Direction right = this.directionFacing.rightDirection();
+        this.directionFacing = right;
+
+    }
+
+    public boolean move(){
+        //move one coordinate in direction facing and return boolean if successful move
+        if (this.directionFacing.name().equals("North")){
+            //Add one to the Y coordinate if moving one coordinate North
+            this.coordinateY +=1;
+            return true;
+        }else if(this.directionFacing.name().equals("South")) {
+            this.coordinateY -=1;
+            return true;
+        }else if(this.directionFacing.name().equals("East")) {
+            this.coordinateX +=1;
+            return true;
+        }else if(this.directionFacing.name().equals("West")) {
+            this.coordinateX -=1;
+            return true;
+        } else{
+            return false;
+        }
+
+    }
 }
