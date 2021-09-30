@@ -12,46 +12,49 @@ public class PlateauRectangleTest {
 
 
     @Test
-    public void plateauRectangleStandardCoordinatesOfFiveFiveTest() {
+    public void plateauRectangleMaximumCoordinatesOfFiveFiveTest() {
         //Arrange
         //set up the maximum coordinates for the rectangle, this represents the input from the user of 5,5
         upperCoordinateX = 5;
         upperCoordinateY = 5;
-        //set up the expected maximum coordinates to test against
-        int expectedUpperX = 5;
-        int expectedUpperY = 5;
+        //set up the expected number of rows and columns to test against, note that coordinates of 5,5 will create a
+        // plateau - 2D array - which has 0-5 rows and 0-5 columns therefore we expect 6 rows and 6 columns
+        int expectedRows = 6;
+        int expectedColumns = 6;
 
         //Act - Construct marsplateau object
+        //This will construct an 2D array of 0-5 rows and 0-5 columns
         PlateauRectangle marsplateau = new PlateauRectangle(upperCoordinateX, upperCoordinateY);
 
         //Assert
-        //Test the number of rows in the plateau is the expected 5
-        assertEquals(expectedUpperX, marsplateau.getPlateau().length);
+        //Test the number of rows in the plateau is the same as expected plateau
+        assertEquals(expectedRows, marsplateau.getPlateau().length);
         //test the number of columns in the plateau is the expected 5. Loop through each row to check the number of columns
         for (int count = 0; count < marsplateau.getPlateau().length; count++) {
-            assertEquals(expectedUpperY, marsplateau.getPlateau()[count].length);
+            assertEquals(expectedColumns, marsplateau.getPlateau()[count].length);
         }
     }
 
     @Test
     public void plateauRectangleMinimumCoordinatesOfTwoTwoTest() {
         //Arrange
-        //set up the minimum coordinates for the rectangle, this represents the input from the user of 5,5
+        //set up the minimum coordinates for the rectangle, this represents the input from the user of 2,2
         upperCoordinateX = 2;
         upperCoordinateY = 2;
-        //set up the expected minimum coordinates to test against
-        int expectedUpperX = 2;
-        int expectedUpperY = 2;
+        //set up the expected minimum number of rows and columns to test against, note that coordinates of 2,2 will create a
+        // plateau - 2D array - which has 0-2 rows and 0-2 columns therefore we expect 3 rows and 3 columns
+        int expectedRows = 3;
+        int expectedColumns = 3;
 
         //Act - Construct marsplateau object
         PlateauRectangle marsplateau = new PlateauRectangle(upperCoordinateX, upperCoordinateY);
 
         //Assert
         //Test the test the number of rows in the plateau is the expected 5
-        assertEquals(expectedUpperX, marsplateau.getPlateau().length);
+        assertEquals(expectedRows, marsplateau.getPlateau().length);
         //test the number of columns in the plateau is the expected 5. Loop through each row to check the number of columns
         for (int count = 0; count < marsplateau.getPlateau().length; count++) {
-            assertEquals(expectedUpperY, marsplateau.getPlateau()[count].length);
+            assertEquals(expectedColumns, marsplateau.getPlateau()[count].length);
         }
     }
 
@@ -93,7 +96,7 @@ public class PlateauRectangleTest {
     @Test
     public void plateauRectangleCoordinatesNegativeThrowIllegalArgumentExceptionTest() {
         //Arrange
-        //set up the maximum coordinates for the rectangle, this represents the input from the user of 5,5
+        //set up negative coordinates for the rectangle, this represents the input from the user of -1,-1
         upperCoordinateX = -1;
         upperCoordinateY = -1;
 

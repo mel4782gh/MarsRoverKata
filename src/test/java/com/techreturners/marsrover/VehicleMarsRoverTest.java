@@ -169,8 +169,5 @@ public class VehicleMarsRoverTest {
         assertEquals(marsRoverExpected.getVehicleLocation(),marsRover.getVehicleLocation());
     }
 
-    @Test
-    public void moveRoverOutsidePlateauBoundaryCoordinatesTest(){
 
-    }
 }

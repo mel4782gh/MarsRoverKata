@@ -12,8 +12,34 @@ public class VehicleMarsRover {
     }
 
     public String getVehicleLocation(){
-        return coordinateX + coordinateY + directionFacing.name();
+        return this.coordinateX + " " + this.coordinateY + " " +  this.directionFacing.name();
     }
+
+    public void setCoordinateX(int coordinateX) {
+        this.coordinateX = coordinateX;
+    }
+
+    public void setCoordinateY(int coordinateY) {
+        this.coordinateY = coordinateY;
+    }
+
+    public int getCoordinateX() {
+        return coordinateX;
+    }
+
+    public int getCoordinateY() {
+        return coordinateY;
+    }
+
+    public Direction getDirectionFacing() {
+        return directionFacing;
+    }
+
+    public void setDirectionFacing(Direction directionFacing) {
+        this.directionFacing = directionFacing;
+    }
+
+
 
     public void left(){
         //change direction 90 degrees to the left

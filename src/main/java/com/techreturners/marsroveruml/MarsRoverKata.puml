@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+PlateauShape <|-- PlateauRectangle
+abstract class PlateauShape{
+-LOWERCOORDINATEX:int=0
+-LOWERCOORDINATEY:int=0
+-upperCoordinateX:int
+-upperCoordinateY:int
+-plateau:[][]
+
++PlateauShape(int upperCoordinateX, int upperCoordinateY):void
++getPlateau():int[][]
+
+}
+
+
+class PlateauRectangle {
++PlateauRectangle(int upperCoordinateX, int upperCoordinateY):void
+-validateUpperCoordinates():boolean
+}
+
+Vehicle<|-- VehicleMarsRover
+
+abstract class Vehicle{
+-direction:Direction
+-coordinateX:int
+-coordinateY:int
+
++Vehicle(int coordinateX, int coordinateY, Direction direction):void
++getVehicleLocation():String
++left():void
++right():void
+
++move():boolean
+}
+
+class VehicleMarsRover{
++Vehicle(int coordinateX, int coordinateY, Direction direction):void
+}
+
+VehicleController<|-- VehicleMarsRoverController
+abstract class VehicleController{
+-PlateauShape
+-Vehicle
++receiveVehicleLocation(String currentLocation):void
++receiveMoveInstructions(String moveInstructions):void
++moveVehicle(String currentLocation, String moveInstructions):boolean
++getVehicleLocationOnPlateau():String
+}
+
+VehicleMarsRoverController o-- VehicleMarsRover :"controls"
+class VehicleMarsRoverController{
++VehicleMarsRoverController():void
+}
+
+enum Direction{
+    N
+    E
+    S
+    W
+}
+
+@enduml
