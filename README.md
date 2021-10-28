@@ -42,11 +42,11 @@ eg.1 3 N
 **********************************************************************************************************
 
 <p>**Still to implement:**</p>
-<p>A main application to ask for input strings from user</p>
+<p>Main application</p>
 <p>Validation of input string for rover's current location and move instructions</p>
 <p>Change Direction enum class to N,S,E,W rather than North, South, East, West enum values</p>
 <p>Make extendable by adding abstract classes as in UML diagram</p>
-<p>Add packages for model and controller classes</p>
+
 
 **Documentation:**
 UML diagram to be updated and added

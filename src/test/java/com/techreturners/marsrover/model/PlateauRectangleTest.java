@@ -1,6 +1,7 @@
-package com.techreturners.marsrover;
+package com.techreturners.marsrover.model;
 
 
+import com.techreturners.marsrover.model.PlateauRectangle;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

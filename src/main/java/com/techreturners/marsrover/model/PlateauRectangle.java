@@ -1,4 +1,4 @@
-package com.techreturners.marsrover;
+package com.techreturners.marsrover.model;
 
 
 public class PlateauRectangle {

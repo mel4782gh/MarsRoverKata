@@ -1,8 +1,12 @@
-package com.techreturners.marsrover;
+package com.techreturners.marsrover.controller;
 
+import com.techreturners.marsrover.model.Direction;
+import com.techreturners.marsrover.model.PlateauRectangle;
+import com.techreturners.marsrover.model.VehicleMarsRover;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 
 public class VehicleMarsRoverControllerTest {
@@ -14,7 +18,7 @@ public class VehicleMarsRoverControllerTest {
         //Arrange
         PlateauRectangle plateauRectangle = new PlateauRectangle(5,5);
         //Expected MarsRover with updates location
-        VehicleMarsRover vehicleMarsRoverExpected = new VehicleMarsRover(1,3,Direction.North);
+        VehicleMarsRover vehicleMarsRoverExpected = new VehicleMarsRover(1,3, Direction.North);
         //Create a vehicle
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(1,1,Direction.North);
         //MarsRoverController moves the rover on the plateau
@@ -105,51 +109,42 @@ public class VehicleMarsRoverControllerTest {
 
     // Test to move the rover to try to go outside upper plateau boundary  - move input is MRMLMLMRMM
     // The rover should only be able to move to the edge of the plateau, this is its last location
-    //Starts at coordinates 42N and attempts to move beyond 45N but cannot
+    //Starts at coordinates 42N and attempts to move beyond 45N so an exception thrown
     @Test
     public void moveVehicleToEdgePlateauBoundaryRoverPreventedFromMovingOutsideUpperBoundary(){
         //Arrange
         PlateauRectangle plateauRectangle = new PlateauRectangle(5,5);
-        //Expected MarsRover with updates location
-        VehicleMarsRover vehicleMarsRoverExpected = new VehicleMarsRover(4,5,Direction.North);
+
         //Create a vehicle
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(4,2,Direction.North);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
-        //Pass move instructions
-        marsRoverController.moveVehicleOnPlateau("MRMLMLMRMM");
 
-
-        //Assert - check the current location is the last location of the vehicle before move to try to go out of plateau boundary
-        assertEquals(vehicleMarsRoverExpected.getVehicleLocation(),vehicleMarsRover.getVehicleLocation());
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.moveVehicleOnPlateau("MRMLMLMRMM"));
     }
 
     // Test to move the rover to try to go outside lower plateau boundary  - move input is MRMLMM
     // The rover should only be able to move to the edge of the plateau, this is its last location
-    //Starts at coordinates 52S and attempts to move beyond 40S but cannot
+    //Starts at coordinates 52S and attempts to move beyond 40S so an exception is thrown
+
     @Test
     public void moveVehicleToEdgePlateauBoundaryRoverPreventedFromMovingOutsideLowerBoundary(){
         //Arrange
         PlateauRectangle plateauRectangle = new PlateauRectangle(5,5);
-        //Expected MarsRover with updates location
-        VehicleMarsRover vehicleMarsRoverExpected = new VehicleMarsRover(4,0,Direction.South);
         //Create a vehicle
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(5,2,Direction.South);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
         //Act
         //Pass move instructions
-        marsRoverController.moveVehicleOnPlateau("MRMLMM");
-
-
-        //Assert - check the current location is the last location of the vehicle before move to try to go out of plateau boundary
-        assertEquals(vehicleMarsRoverExpected.getVehicleLocation(),vehicleMarsRover.getVehicleLocation());
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () ->marsRoverController.moveVehicleOnPlateau("MRMLMM"));
     }
 
 
     //Tests to validate the controller throws an exception if rover asked to move out of plateau boundary
-    @Test(expected=UnsupportedOperationException.class)
+    @Test
     public void validateMoveVehicleThrowsExceptionWhenMoveNorthOutOfPlateauUpperCoordinatesBoundaryTest()  {
         //Arrange
         //Create a plateau
@@ -158,12 +153,12 @@ public class VehicleMarsRoverControllerTest {
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(5,5,Direction.North);
         //MarsRoverController  moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
-        marsRoverController.validateMoveVehicleOnPlateau();
-        //Assert is if an exception is thrown
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.validateMoveVehicleOnPlateau());
+
     }
 
-    @Test(expected=UnsupportedOperationException.class)
+    @Test
     public void validateMoveVehicleThrowsExceptionWhenMoveNorthOutOfPlateauCoordinateOneFiveBoundaryTest()  {
         //Arrange
         //Create a plateau
@@ -172,14 +167,14 @@ public class VehicleMarsRoverControllerTest {
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(1,5,Direction.North);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
+
         //validateMoveVehicleOnPlateau throws an exception if move would be off the plateau
-        marsRoverController.validateMoveVehicleOnPlateau();
-        //Assert is if an exception is thrown
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.validateMoveVehicleOnPlateau());
 
     }
 
-    @Test(expected=UnsupportedOperationException.class)
+    @Test
     public void validateMoveVehicleThrowsExceptionWhenMoveSouthOutOfLowerCoordinatesPlateauBoundaryTest()  {
         //Arrange
         //Create a plateau
@@ -188,14 +183,14 @@ public class VehicleMarsRoverControllerTest {
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(0,0,Direction.South);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
+
         //validateMoveVehicleOnPlateau throws an exception if move would be off the plateau
-        marsRoverController.validateMoveVehicleOnPlateau();
-        //Assert is if an exception is thrown
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.validateMoveVehicleOnPlateau());
 
     }
 
-    @Test(expected=UnsupportedOperationException.class)
+    @Test
     public void validateMoveVehicleThrowsExceptionWhenMoveEastOutOfPlateauUpperCoordinatesBoundaryTest()  {
         //Arrange
         //Create a plateau
@@ -204,14 +199,14 @@ public class VehicleMarsRoverControllerTest {
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(5,5,Direction.East);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
+
         //validateMoveVehicleOnPlateau throws an exception if move would be off the plateau
-        marsRoverController.validateMoveVehicleOnPlateau();
-        //Assert is if an exception is thrown
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.validateMoveVehicleOnPlateau());
 
     }
 
-    @Test(expected=UnsupportedOperationException.class)
+    @Test
     public void validateMoveVehicleThrowsExceptionWhenMoveWestOutOfPlateauLowerCoordinatesBoundaryTest()  {
         //Arrange
         //Create a plateau
@@ -220,10 +215,10 @@ public class VehicleMarsRoverControllerTest {
         VehicleMarsRover vehicleMarsRover = new VehicleMarsRover(0,0,Direction.West);
         //MarsRoverController moves the rover on the plateau
         VehicleMarsRoverController marsRoverController = new VehicleMarsRoverController(plateauRectangle, vehicleMarsRover);
-        //Act
+
         //validateMoveVehicleOnPlateau throws an exception if move would be off the plateau
-        marsRoverController.validateMoveVehicleOnPlateau();
-        //Assert is if an exception is thrown
+        //Act and assert
+        assertThrows(UnsupportedOperationException.class, () -> marsRoverController.validateMoveVehicleOnPlateau());
 
     }
 }

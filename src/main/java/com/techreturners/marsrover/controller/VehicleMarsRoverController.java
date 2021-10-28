@@ -1,4 +1,8 @@
-package com.techreturners.marsrover;
+package com.techreturners.marsrover.controller;
+
+import com.techreturners.marsrover.model.Direction;
+import com.techreturners.marsrover.model.PlateauRectangle;
+import com.techreturners.marsrover.model.VehicleMarsRover;
 
 public class VehicleMarsRoverController {
 
@@ -11,7 +15,7 @@ public class VehicleMarsRoverController {
         this.marsRover = marsRover;
     }
 
-    public void moveVehicleOnPlateau(String moveInstructions){
+    public void moveVehicleOnPlateau(String moveInstructions) throws UnsupportedOperationException{
         try{
             //moveInstructions would have already been validated to contain only capital letters LRM
             //with a maximum length of 10 characters before being passed to this method
@@ -31,13 +35,14 @@ public class VehicleMarsRoverController {
                     //turn rover Right location and coordinates stay the same
                     this.marsRover.right();
                 }else{
-                    System.out.println("Unable to rover instruction");
+                    System.out.println("Unable to process rover instruction");
                 }
             }
         //Output the location after the move instructions processed
             System.out.println("Current location of Mars Rover after move instructions: " + this.marsRover.getVehicleLocation());
         }catch (Exception e){
-            System.out.println(e.getMessage()+ " Current location is: " + this.marsRover.getVehicleLocation());
+            System.err.println(e.getMessage() + "Last valid move location is: " + this.marsRover.getVehicleLocation());
+            throw (e);
         }
 
     }

@@ -1,4 +1,4 @@
-package com.techreturners.marsrover;
+package com.techreturners.marsrover.model;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
@@ -15,7 +15,7 @@ public class VehicleMarsRoverTest {
     public void createRoverAndGetLocationTest(){
         //Arrange
         //Expected result
-        VehicleMarsRover marsRoverExpected = new VehicleMarsRover(1, 1,Direction.North);
+        VehicleMarsRover marsRoverExpected = new VehicleMarsRover(1, 1, Direction.North);
 
         //Act
         VehicleMarsRover marsRover = new VehicleMarsRover(coordinateX, coordinateY, Direction.North);
