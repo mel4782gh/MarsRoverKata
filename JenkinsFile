@@ -6,7 +6,7 @@ pipeline {
             steps {
             //get maven home path
             def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
-                    sh "${mvnHome}/mvn --version'
+                    sh "${mvnHome}/mvn --version"
                    }
         }
     }
