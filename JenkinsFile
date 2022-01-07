@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                    sh 'mvn --version'
+            //get maven home path
+            def mvnHome = tool name: 'MAVEN_HOME', type: 'maven'
+                    sh "${mvnHome}/mvn --version'
                    }
         }
     }
