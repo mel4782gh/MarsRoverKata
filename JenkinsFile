@@ -1,12 +1,11 @@
 pipeline {
-    agent { any { docker 'maven:3.8.4-openjdk-11-slim' }
-          }
+    agent {
+     docker { image 'maven:3.8.4-openjdk-11-slim' }
+     }
     stages {
         stage('build') {
             steps {
-            //get maven home path
-            script{def MAVEN_HOME = tool name: 'MAVEN_HOME', type: 'maven'}
-            sh "${MAVEN_HOME}/mvn --version"
+            sh "mvn --version"
             }
         }
     }
